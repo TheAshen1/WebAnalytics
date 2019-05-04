@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebAnalytics.Entities\WebAnalytics.DAL.Entities.csproj" />
+    <ProjectReference Include="..\WebAnalytics.ViewModels\WebAnalytics.Presentation.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
