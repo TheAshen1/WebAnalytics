@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28822.285
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.Presentation.UI", "WebAnalytics.UI\WebAnalytics.Presentation.UI.csproj", "{ECB392A1-16FE-42B4-BE87-87F0772CC21E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.Presentation.UI", "WebAnalytics.Presentation.UI\WebAnalytics.Presentation.UI.csproj", "{ECB392A1-16FE-42B4-BE87-87F0772CC21E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.DAL.Context", "WebAnalytics.DAL\WebAnalytics.DAL.Context.csproj", "{43159990-3939-4C9A-9F4B-4556799196D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.DAL.Context", "WebAnalytics.DAL.Context\WebAnalytics.DAL.Context.csproj", "{43159990-3939-4C9A-9F4B-4556799196D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.DAL.Entities", "WebAnalytics.Entities\WebAnalytics.DAL.Entities.csproj", "{6F9AEB31-C15D-4239-949D-4FA723BE4378}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.DAL.Entities", "WebAnalytics.DAL.Entities\WebAnalytics.DAL.Entities.csproj", "{6F9AEB31-C15D-4239-949D-4FA723BE4378}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.Presentation.ViewModels", "WebAnalytics.ViewModels\WebAnalytics.Presentation.ViewModels.csproj", "{C5A754B1-E551-43B7-9C31-60DBDCA45079}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.Presentation.ViewModels", "WebAnalytics.Presentation.ViewModels\WebAnalytics.Presentation.ViewModels.csproj", "{C5A754B1-E551-43B7-9C31-60DBDCA45079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.Misc.Common", "WebAnalytics.Common\WebAnalytics.Misc.Common.csproj", "{959DC98D-43DD-42CB-8D8E-F5AB10D048F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.Misc.Common", "WebAnalytics.Misc.Common\WebAnalytics.Misc.Common.csproj", "{959DC98D-43DD-42CB-8D8E-F5AB10D048F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.BLL.Services", "WebAnalytics.Services\WebAnalytics.BLL.Services.csproj", "{2D15027D-23B7-4199-8B99-0E44BBB05246}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.BLL.Services", "WebAnalytics.BLL.Services\WebAnalytics.BLL.Services.csproj", "{2D15027D-23B7-4199-8B99-0E44BBB05246}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0F442358-FC66-4FE7-B664-C1A133CEEA14}"
 EndProject
@@ -23,9 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{CD4F912A-8C3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{F640B81F-ABF5-4D55-B51A-52EBCD0CF0F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.DAL.Repositories", "WebAnalytics.Repositories\WebAnalytics.DAL.Repositories.csproj", "{62BD2070-9A2D-4945-B597-586C97DCA9F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.DAL.Repositories", "WebAnalytics.DAL.Repositories\WebAnalytics.DAL.Repositories.csproj", "{62BD2070-9A2D-4945-B597-586C97DCA9F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.BLL.Utility", "WebAnalytics.BLL.Mapper\WebAnalytics.BLL.Utility.csproj", "{FAA82E73-DDD9-4C9D-A11A-432A0A516634}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnalytics.BLL.Utility", "WebAnalytics.BLL.Utility\WebAnalytics.BLL.Utility.csproj", "{FAA82E73-DDD9-4C9D-A11A-432A0A516634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

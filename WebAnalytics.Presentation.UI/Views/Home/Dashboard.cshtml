@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+
+<link type="text/css" rel="stylesheet" href="~/lib/jsgrid/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="~/lib/jsgrid/jsgrid-theme.min.css" />
+
+<div id="jsGrid"></div>
+
+@section Scripts {
+    <script src="~/lib/jsgrid/jsgrid.js"></script>
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+}
