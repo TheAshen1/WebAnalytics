@@ -3,6 +3,7 @@ using WebAnalytics.BLL.Mapper;
 using WebAnalytics.DAL.Repositories.Interfaces;
 using WebAnalytics.Services.Interfaces;
 using WebAnalytics.Presentation.ViewModels;
+using System.Linq;
 
 namespace WebAnalytics.Services
 {
@@ -25,6 +26,28 @@ namespace WebAnalytics.Services
         {
             var entities = _clientActionRepository.GetAll();
             return Mapper.Map(entities);
+        }
+
+        public List<ClickStatisticsViewModel> GetClickStatistics()
+        {
+            var clickStatistics = _clientActionRepository.GetClicks()
+                .GroupBy(a => a.Description)
+                .Select(group => new ClickStatisticsViewModel() {
+                    Description = group.Key,
+                    Count = group.Count()
+                }).ToList();
+            return clickStatistics;
+        }
+
+        public List<PageViewCountViewModel> GetPageViewStatistics()
+        {
+            var pageViews = _clientActionRepository.GetPageNavigations()
+                .GroupBy(a => a.Url)
+                .Select(group => new PageViewCountViewModel() {
+                    Url = group.Key,
+                    Count = group.Count()
+                }).ToList();
+            return pageViews;
         }
     }
 }

@@ -7,5 +7,7 @@ namespace WebAnalytics.DAL.Repositories.Interfaces
     {
         void Add(ClientAction clientAction);
         List<ClientAction> GetAll();
+        List<ClientAction> GetPageNavigations();
+        List<ClientAction> GetClicks();
     }
 }

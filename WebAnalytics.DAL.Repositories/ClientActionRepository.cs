@@ -3,6 +3,7 @@ using System.Linq;
 using WebAnalytics.DAL.Context;
 using WebAnalytics.DAL.Entities;
 using WebAnalytics.DAL.Repositories.Interfaces;
+using WebAnalytics.Misc.Common.Enums;
 
 namespace WebAnalytics.DAL.Repositories
 {
@@ -24,6 +25,18 @@ namespace WebAnalytics.DAL.Repositories
         public List<ClientAction> GetAll()
         {
             return _context.ClientActions.ToList();
+        }
+
+        public List<ClientAction> GetClicks()
+        {
+            return _context.ClientActions
+                .Where(a => a.ActionType == ClientActionType.Click).ToList();
+        }
+
+        public List<ClientAction> GetPageNavigations()
+        {
+            return _context.ClientActions
+                .Where(a => a.ActionType == ClientActionType.PageNavigation).ToList();
         }
     }
 }

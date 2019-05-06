@@ -29,5 +29,19 @@ namespace WebAnalytics.UI.Controllers.Api
             var clientActions = _clientActionService.GetAll();
             return clientActions;
         }
+
+        [HttpGet("PageViewStatistics")]
+        public ActionResult<List<PageViewCountViewModel>> GetPageViewStatistics()
+        {
+            var pageViews = _clientActionService.GetPageViewStatistics();
+            return pageViews;
+        }
+
+        [HttpGet("ClickStatistics")]
+        public ActionResult<List<ClickStatisticsViewModel>> GetClickStatistics()
+        {
+            var clickStatistics = _clientActionService.GetClickStatistics();
+            return clickStatistics;
+        }
     }
 }

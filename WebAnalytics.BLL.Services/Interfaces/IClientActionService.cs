@@ -7,5 +7,7 @@ namespace WebAnalytics.Services.Interfaces
     {
         void Add(AddClientActionViewModel clientActionViewModel);
         List<ClientActionViewModel> GetAll();
+        List<PageViewCountViewModel> GetPageViewStatistics();
+        List<ClickStatisticsViewModel> GetClickStatistics();
     }
 }
