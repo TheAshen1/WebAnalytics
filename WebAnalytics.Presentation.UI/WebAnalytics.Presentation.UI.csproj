@@ -18,4 +18,9 @@
     <ProjectReference Include="..\WebAnalytics.Presentation.ViewModels\WebAnalytics.Presentation.ViewModels.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\platform\" />
+  </ItemGroup>
+
 </Project>

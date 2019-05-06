@@ -7,6 +7,12 @@
                 ActionType: monitor.ActionType.PageNavigation,
                 Url: document.URL,
                 FromUrl: document.referrer,
+                Platform: platform.name,
+                PlatformVersion: platform.version,
+                OS: platform.os.family,
+                OSVersion: platform.os.version,
+                OSArchitecture: platform.os.architecture,
+                Product: platform.product
             };
             monitor.registerAction(action);
 
@@ -15,7 +21,13 @@
                 let action = {
                     ActionType: monitor.ActionType.Click,
                     Url: document.URL,
-                    Description: description
+                    Description: description,
+                    Platform: platform.name,
+                    PlatformVersion: platform.version,
+                    OS: platform.os.family,
+                    OSVersion: platform.os.version,
+                    OSArchitecture: platform.os.architecture,
+                    Product: platform.product
                 };
                 monitor.registerAction(action);
             });

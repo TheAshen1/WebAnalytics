@@ -26,7 +26,13 @@ namespace WebAnalytics.BLL.Mapper
                 Url = viewModel.Url,
                 FromUrl = viewModel.FromUrl,
                 DateTime = viewModel.DateTime ?? DateTime.Now,
-                Description = viewModel.Description
+                Description = viewModel.Description,
+                Platform = viewModel.Platform,
+                PlatformVersion = viewModel.PlatformVersion,
+                OS = viewModel.OS,
+                OSVersion = viewModel.OSVersion,
+                OSArchitecture = viewModel.OSArchitecture,
+                Product = viewModel.Product
             };
         }
 
@@ -49,7 +55,13 @@ namespace WebAnalytics.BLL.Mapper
                 Url = entity.Url,
                 FromUrl = entity.FromUrl,
                 DateTime = entity.DateTime,
-                Description = entity.Description
+                Description = entity.Description,
+                Platform = entity.Platform,
+                PlatformVersion = entity.PlatformVersion,
+                OS = entity.OS,
+                OSVersion = entity.OSVersion,
+                OSArchitecture = entity.OSArchitecture,
+                Product = entity.Product
             };
         }
 
@@ -72,7 +84,13 @@ namespace WebAnalytics.BLL.Mapper
                 Url = viewModel.Url,
                 FromUrl = viewModel.FromUrl,
                 DateTime = DateTime.Now,
-                Description = viewModel.Description
+                Description = viewModel.Description,
+                Platform = viewModel.Platform,
+                PlatformVersion = viewModel.PlatformVersion,
+                OS = viewModel.OS,
+                OSVersion = viewModel.OSVersion,
+                OSArchitecture = viewModel.OSArchitecture,
+                Product = viewModel.Product
             };
         }
     }
