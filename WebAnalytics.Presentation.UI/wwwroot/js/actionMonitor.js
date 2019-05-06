@@ -16,8 +16,8 @@
             };
             monitor.registerAction(action);
 
-            $('track').on('click', function (e) {
-                let description = $(this).prop('data-description');
+            $('.track').on('click', function (e) {
+                let description = $(this).attr('data-description');
                 let action = {
                     ActionType: monitor.ActionType.Click,
                     Url: document.URL,
@@ -31,33 +31,19 @@
                 };
                 monitor.registerAction(action);
             });
-            // Maybe later
-            //navigator.geolocation.getCurrentPosition(positionSuccess, positionError)
-
-            //function positionSuccess(geo) {
-            //    document.cookie = 'latitude=' + geo.coords.latitude;
-            //    document.cookie = 'longitude=' + geo.coords.longitude;
-            //    document.cookie = 'accuracy=' + geo.coords.accuracy;
-            //}
-
-            //function positionError(geo) {
-            //    document.cookie = 'latitude=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-            //    document.cookie = 'longitude=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-            //    document.cookie = 'accuracy=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-            //}
         });
 
         registerAction = function (action) {
             $.ajax({
-                url: "api/ClientActions",
+                url: "/api/ClientActions",
                 type: "POST",
                 data: JSON.stringify(action),
                 contentType: "application/json",
                 success: function () {
 
                 },
-                error: function (xhr, message, error) {
-                    console.error(error);
+                error: function (e) {
+                    console.error(e);
                 }
             });
         }

@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using WebAnalytics.Presentation.ViewModels;
+using WebAnalytics.UI.Middleware;
 using WebAnalytics.UI.Models;
 
 namespace WebAnalytics.UI.Controllers
@@ -20,7 +21,7 @@ namespace WebAnalytics.UI.Controllers
         public IActionResult Index()
         {
             HttpContext.Session.Set("test", Encoding.Unicode.GetBytes("something"));
-            return View(new HomeViewModel { UserCount = _memoryCache.Get<int>("Count"), SessionId = HttpContext.Session.Id, UserInfo = _memoryCache.Get<string>(HttpContext.Session.Id) });
+            return View(new HomeViewModel { UserCount = TrackingMiddleware.SessionCount, SessionId = HttpContext.Session.Id, UserInfo = _memoryCache.Get<string>(HttpContext.Session.Id) });
         }
 
         public IActionResult Privacy()
