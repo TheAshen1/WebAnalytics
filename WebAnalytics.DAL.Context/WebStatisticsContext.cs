@@ -18,7 +18,7 @@ namespace WebAnalytics.DAL.Context
         {
             modelBuilder
                 .Entity<ClientAction>()
-                .Property(l => l.ActionType)
+                .Property(a => a.ActionType)
                 .HasConversion(
                     t => t.ToString(),
                     t => (ClientActionType)Enum.Parse(typeof(ClientActionType), t));

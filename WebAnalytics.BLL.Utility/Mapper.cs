@@ -22,6 +22,7 @@ namespace WebAnalytics.BLL.Mapper
             return new ClientAction()
             {
                 Id = viewModel.Id,
+                Ip = viewModel.Ip,
                 ActionType = viewModel.ActionType,
                 Url = viewModel.Url,
                 FromUrl = viewModel.FromUrl,
@@ -32,7 +33,7 @@ namespace WebAnalytics.BLL.Mapper
                 OS = viewModel.OS,
                 OSVersion = viewModel.OSVersion,
                 OSArchitecture = viewModel.OSArchitecture,
-                Product = viewModel.Product
+                Device = viewModel.Device
             };
         }
 
@@ -51,6 +52,7 @@ namespace WebAnalytics.BLL.Mapper
             return new ClientActionViewModel()
             {
                 Id = entity.Id,
+                Ip = entity.Ip,
                 ActionType = entity.ActionType,
                 Url = entity.Url,
                 FromUrl = entity.FromUrl,
@@ -61,25 +63,26 @@ namespace WebAnalytics.BLL.Mapper
                 OS = entity.OS,
                 OSVersion = entity.OSVersion,
                 OSArchitecture = entity.OSArchitecture,
-                Product = entity.Product
+                Device = entity.Device
             };
         }
 
-        public static List<ClientAction> Map(List<AddClientActionViewModel> viewModels)
+        public static List<ClientAction> Map(List<AddClientActionViewModel> viewModels, string ip)
         {
             var entities = new List<ClientAction>();
             foreach (var viewModel in viewModels)
             {
-                entities.Add(Map(viewModel));
+                entities.Add(Map(viewModel, ip));
             }
             return entities;
         }
 
-        public static ClientAction Map(AddClientActionViewModel viewModel)
+        public static ClientAction Map(AddClientActionViewModel viewModel, string ip)
         {
             return new ClientAction()
             {
                 Id = Guid.Empty,
+                Ip = ip,
                 ActionType = viewModel.ActionType,
                 Url = viewModel.Url,
                 FromUrl = viewModel.FromUrl,
@@ -90,7 +93,7 @@ namespace WebAnalytics.BLL.Mapper
                 OS = viewModel.OS,
                 OSVersion = viewModel.OSVersion,
                 OSArchitecture = viewModel.OSArchitecture,
-                Product = viewModel.Product
+                Device = viewModel.Device
             };
         }
     }

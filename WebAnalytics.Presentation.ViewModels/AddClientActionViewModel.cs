@@ -13,6 +13,6 @@ namespace WebAnalytics.Presentation.ViewModels
         public string OS { get; set; }
         public string OSVersion { get; set; }
         public string OSArchitecture { get; set; }
-        public string Product { get; set; }
+        public string Device { get; set; }
     }
 }

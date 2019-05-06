@@ -42,11 +42,42 @@
                     console.error(e);
                 }
             });
+
+            $.ajax({
+                url: "/api/ClientActions/GetRealtimeStatistics",
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        dashboard.buildOnlineUsersGrid(data.onlineUsers);
+                    }
+                },
+                error: function (e) {
+                    console.error(e);
+                }
+            });
         });
+
+        buildOnlineUsersGrid = function (data) {
+            $("#onlineUsersGrid").jsGrid({
+                width: "100%",
+                height: "600px",
+
+                sorting: true,
+                paging: true,
+
+                data: data,
+
+                fields: [
+                    { name: "ip", type: "string", width: "200px" },
+                    { name: "userAgent", type: "string", width: "200px" },
+                    { name: "lastActivity", type: "string", width: "200px" }
+                ]
+            });
+        }
 
         buildPageViewsGrid = function (data) {
             $("#pageViewsGrid").jsGrid({
-                width: "auto",
+                width: "100%",
                 height: "600px",
 
                 sorting: true,
@@ -63,7 +94,7 @@
         
         buildClickStatisticsGrid = function (data) {
             $("#clickStatisticsGrid").jsGrid({
-                width: "auto",
+                width: "100%",
                 height: "400px",
 
                 sorting: true,
@@ -80,7 +111,7 @@
 
         buildGridAllActions = function (data) {
             $("#allActionsGrid").jsGrid({
-                width: "auto",
+                width: "100%",
                 height: "400px",
 
                 sorting: true,
@@ -89,7 +120,7 @@
                 data: data,
 
                 fields: [
-                    { name: "id", type: "string", width: "200px" },
+                    { name: "ip", type: "string", width: "200px" },
                     { name: "actionType", type: "string", width: "150px" },
                     { name: "url", type: "string", width: "400px" },
                     { name: "fromUrl", type: "string", width: "400px" },

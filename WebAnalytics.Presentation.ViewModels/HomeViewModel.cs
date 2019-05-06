@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WebAnalytics.Presentation.ViewModels
+﻿namespace WebAnalytics.Presentation.ViewModels
 {
     public class HomeViewModel
     {

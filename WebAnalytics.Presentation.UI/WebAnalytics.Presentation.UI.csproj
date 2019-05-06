@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
   </ItemGroup>
 
 
@@ -20,6 +21,7 @@
 
 
   <ItemGroup>
+    <Folder Include="wwwroot\lib\devicedetector\" />
     <Folder Include="wwwroot\lib\platform\" />
   </ItemGroup>
 

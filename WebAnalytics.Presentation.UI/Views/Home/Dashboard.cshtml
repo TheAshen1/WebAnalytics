@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Dashboard";
 }
 
@@ -8,13 +7,32 @@
 <link type="text/css" rel="stylesheet" href="~/lib/jsgrid/jsgrid.min.css" />
 <link type="text/css" rel="stylesheet" href="~/lib/jsgrid/jsgrid-theme.min.css" />
 
-<div id="allActionsGrid"></div>
-<div class="row">
-    <div class="col-md-6"><div id="pageViewsGrid"></div></div>
-    <div class="col-md-6"><div id="clickStatisticsGrid"></div></div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="realtime-tab" data-toggle="tab" href="#realtime" role="tab" aria-controls="realtime" aria-selected="true">Realtime</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="total-tab" data-toggle="tab" href="#total" role="tab" aria-controls="total" aria-selected="false">Total</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="behaiviour-tab" data-toggle="tab" href="#behaiviour" role="tab" aria-controls="behaiviour" aria-selected="false">Behaivour</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="realtime" role="tabpanel" aria-labelledby="realtime-tab">
+        <div id="onlineUsersGrid"></div>
+    </div>
+    <div class="tab-pane fade" id="total" role="tabpanel" aria-labelledby="total-tab">
+        <div><p>total stats</p></div>
+    </div>
+    <div class="tab-pane fade" id="behaiviour" role="tabpanel" aria-labelledby="behaiviour-tab">
+        <div id="allActionsGrid"></div>
+        <div id="pageViewsGrid"></div>
+        <div id="clickStatisticsGrid"></div>
+    </div>
 </div>
 
 @section Scripts {
-    <script src="~/lib/jsgrid/jsgrid.js"></script>
-    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+<script src="~/lib/jsgrid/jsgrid.js"></script>
+<script src="~/js/dashboard.js" asp-append-version="true"></script>
 }

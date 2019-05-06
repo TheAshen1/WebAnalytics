@@ -16,9 +16,9 @@ namespace WebAnalytics.Services
             _clientActionRepository = clientActionRepository;
         }
 
-        public void Add(AddClientActionViewModel clientActionViewModel)
+        public void Add(AddClientActionViewModel clientActionViewModel, string ip)
         {
-            var entity = Mapper.Map(clientActionViewModel);
+            var entity = Mapper.Map(clientActionViewModel, ip);
             _clientActionRepository.Add(entity);
         }
 

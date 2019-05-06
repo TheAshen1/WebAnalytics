@@ -12,7 +12,7 @@
                 OS: platform.os.family,
                 OSVersion: platform.os.version,
                 OSArchitecture: platform.os.architecture,
-                Product: platform.product
+                Device: deviceDetector.device
             };
             monitor.registerAction(action);
 
@@ -27,7 +27,7 @@
                     OS: platform.os.family,
                     OSVersion: platform.os.version,
                     OSArchitecture: platform.os.architecture,
-                    Product: platform.product
+                    Device: deviceDetector.device
                 };
                 monitor.registerAction(action);
             });
