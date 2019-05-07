@@ -12,11 +12,5 @@ namespace WebAnalytics.DAL.Entities
         public string FromUrl { get; set; }
         public DateTime DateTime { get; set; }
         public string Description { get; set; }
-        public string Platform { get; set; }
-        public string PlatformVersion { get; set; }
-        public string OS { get; set; }
-        public string OSVersion { get; set; }
-        public string OSArchitecture { get; set; }
-        public string Device { get; set; }
     }
 }

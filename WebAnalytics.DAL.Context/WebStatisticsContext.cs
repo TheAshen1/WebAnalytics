@@ -24,14 +24,12 @@ namespace WebAnalytics.DAL.Context
                     t => (ClientActionType)Enum.Parse(typeof(ClientActionType), t));
 
             modelBuilder
-                .Entity<UniqueUsersCounter>()
-                .HasData(new UniqueUsersCounter() {
-                    Id = 1,
-                    Counter = 0
-                });
+                .Entity<UniqueUser>()
+                .Property(et => et.Id)
+                .ValueGeneratedNever();
         }
 
         public DbSet<ClientAction> ClientActions { get; set; }
-        public DbSet<UniqueUsersCounter> UniqueUsersCounters { get; set; }
+        public DbSet<UniqueUser> UniqueUsers { get; set; }
     }
 }

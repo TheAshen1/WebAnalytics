@@ -15,12 +15,12 @@ namespace WebAnalytics.DAL.Repositories
 
         public int Get()
         {
-            return _context.UniqueUsersCounters.First().Counter;
+            return _context.UniqueUsers.First().Counter;
         }
 
         public void Increment()
         {
-            var entity = _context.UniqueUsersCounters.First();
+            var entity = _context.UniqueUsers.First();
             entity.Counter++;
             _context.SaveChanges();
         }
