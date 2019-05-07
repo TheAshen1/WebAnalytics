@@ -20,7 +20,7 @@ namespace WebAnalytics.UI.Controllers
 
         public IActionResult Index()
         {
-            HttpContext.Session.Set("test", Encoding.Unicode.GetBytes("something"));
+            //HttpContext.Session.Set("test", Encoding.Unicode.GetBytes("something"));
             return View(new HomeViewModel { UserCount = TrackingMiddleware.OnlineUsers.Count, SessionId = HttpContext.Session.Id, UserInfo = _memoryCache.Get<string>(HttpContext.Session.Id) });
         }
 

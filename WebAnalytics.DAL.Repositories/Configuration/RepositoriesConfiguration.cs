@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebAnalytics.DAL.Context;
 using WebAnalytics.DAL.Repositories.Interfaces;
 
-namespace WebAnalytics.DAL.Repositories
+namespace WebAnalytics.DAL.Repositories.Configuration
 {
     public static class RepositoriesConfiguration
     {
@@ -12,6 +11,7 @@ namespace WebAnalytics.DAL.Repositories
         {
             services.AddContext(configuration);
             services.AddScoped<IClientActionRepository, ClientActionRepository>();
+            services.AddScoped<IUniqueUsersCounterRepository, UniqueUsersCounterRepository>();
             return services;
         }
     }

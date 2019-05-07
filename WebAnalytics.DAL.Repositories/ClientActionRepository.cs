@@ -4,6 +4,7 @@ using WebAnalytics.DAL.Context;
 using WebAnalytics.DAL.Entities;
 using WebAnalytics.DAL.Repositories.Interfaces;
 using WebAnalytics.Misc.Common.Enums;
+using WebAnalytics.Misc.Common.Extensions;
 
 namespace WebAnalytics.DAL.Repositories
 {
@@ -30,13 +31,34 @@ namespace WebAnalytics.DAL.Repositories
         public List<ClientAction> GetClicks()
         {
             return _context.ClientActions
-                .Where(a => a.ActionType == ClientActionType.Click).ToList();
+                .Where(a => a.ActionType == ClientActionType.Click)
+                .ToList();
+        }
+
+        public int GetClicksCount()
+        {
+            return _context.ClientActions
+                .Where(a => a.ActionType == ClientActionType.Click)
+                .Count();
+        }
+
+        public PagedResult<ClientAction> GetPage(int page, int pageSize)
+        {
+            return _context.ClientActions.GetPaged(page, pageSize);
         }
 
         public List<ClientAction> GetPageNavigations()
         {
             return _context.ClientActions
-                .Where(a => a.ActionType == ClientActionType.PageNavigation).ToList();
+                .Where(a => a.ActionType == ClientActionType.PageNavigation)
+                .ToList();
+        }
+
+        public int GetPageNavigationsCount()
+        {
+            return _context.ClientActions
+                .Where(a => a.ActionType == ClientActionType.PageNavigation)
+                .Count();
         }
     }
 }

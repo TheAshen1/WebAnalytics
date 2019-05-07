@@ -22,8 +22,16 @@ namespace WebAnalytics.DAL.Context
                 .HasConversion(
                     t => t.ToString(),
                     t => (ClientActionType)Enum.Parse(typeof(ClientActionType), t));
+
+            modelBuilder
+                .Entity<UniqueUsersCounter>()
+                .HasData(new UniqueUsersCounter() {
+                    Id = 1,
+                    Counter = 0
+                });
         }
 
         public DbSet<ClientAction> ClientActions { get; set; }
+        public DbSet<UniqueUsersCounter> UniqueUsersCounters { get; set; }
     }
 }

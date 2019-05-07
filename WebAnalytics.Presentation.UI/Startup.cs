@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using System;
-using System.Threading.Tasks;
-using WebAnalytics.BLL.Services;
+using WebAnalytics.BLL.Services.Configuration;
 using WebAnalytics.UI.Middleware;
 
 namespace WebAnalytics.UI
@@ -32,7 +30,6 @@ namespace WebAnalytics.UI
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
             services.AddServices(Configuration);
             //services.AddDefaultIdentity<IdentityUser>()
             //    .AddEntityFrameworkStores<WebAnalytics.DAL.Context.WebStatisticsContext>();

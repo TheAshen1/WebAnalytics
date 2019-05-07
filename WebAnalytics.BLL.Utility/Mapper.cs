@@ -7,7 +7,7 @@ namespace WebAnalytics.BLL.Mapper
 {
     public static class Mapper
     {
-        public static List<ClientAction> Map(List<ClientActionViewModel> viewModels)
+        public static List<ClientAction> Map(IList<ClientActionViewModel> viewModels)
         {
             var entities = new List<ClientAction>();
             foreach (var viewModel in viewModels)
@@ -37,7 +37,7 @@ namespace WebAnalytics.BLL.Mapper
             };
         }
 
-        public static List<ClientActionViewModel> Map(List<ClientAction> entities)
+        public static List<ClientActionViewModel> Map(IList<ClientAction> entities)
         {
             var viewModels = new List<ClientActionViewModel>();
             foreach (var entity in entities)
@@ -67,7 +67,7 @@ namespace WebAnalytics.BLL.Mapper
             };
         }
 
-        public static List<ClientAction> Map(List<AddClientActionViewModel> viewModels, string ip)
+        public static List<ClientAction> Map(IList<AddClientActionViewModel> viewModels, string ip)
         {
             var entities = new List<ClientAction>();
             foreach (var viewModel in viewModels)

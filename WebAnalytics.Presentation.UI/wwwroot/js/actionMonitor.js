@@ -35,7 +35,7 @@
 
         registerAction = function (action) {
             $.ajax({
-                url: "/api/ClientActions",
+                url: "/api/Statistics",
                 type: "POST",
                 data: JSON.stringify(action),
                 contentType: "application/json",
