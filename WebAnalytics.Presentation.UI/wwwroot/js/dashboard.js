@@ -38,7 +38,7 @@
                 type: "GET",
                 success: function (data) {
                     if (data) {
-                        dashboard.buildGrid("onlineUsers", data.onlineUsers);
+                        dashboard.buildGrid("onlineClients", data.onlineClients);
                     }
                 },
                 error: function (e) {
@@ -61,7 +61,59 @@
                 }
             });
 
+            $.ajax({
+                url: "/api/Statistics/Clients",
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        dashboard.buildGrid("clients", data);
+                    }
+                },
+                error: function (e) {
+                    console.error(e);
+                }
+            });
 
+            $.ajax({
+                url: "/api/Statistics/Clients",
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        dashboard.buildGrid("clients", data);
+                    }
+                },
+                error: function (e) {
+                    console.error(e);
+                }
+            });
+            
+            $.ajax({
+                url: "/api/Statistics/DeviceUsage",
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        let labels = [];
+                        let cleanData = [];
+                        for (let key in data) {
+                            labels.push(key);
+                            cleanData.push(data[key]);
+                        }
+                        var ctx = document.getElementById('deviceUsage').getContext('2d');
+                        var myDoughnutChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                dataset: [{
+                                    data: cleanData
+                                }]
+                            },
+                            options: Chart.defaults.doughnut
+                        });
+                    }
+                },
+                error: function (e) {
+                    console.error(e);
+                }
+            });            
         });
 
         buildGrid = function (gridId, data) {

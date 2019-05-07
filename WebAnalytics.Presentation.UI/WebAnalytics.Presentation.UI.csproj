@@ -11,18 +11,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
+    <PackageReference Include="UAParser" Version="3.1.36" />
+    <PackageReference Include="Wangkanai.Detection" Version="2.0.0-beta11" />
   </ItemGroup>
 
 
   <ItemGroup>
     <ProjectReference Include="..\WebAnalytics.BLL.Services\WebAnalytics.BLL.Services.csproj" />
     <ProjectReference Include="..\WebAnalytics.Presentation.ViewModels\WebAnalytics.Presentation.ViewModels.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\devicedetector\" />
-    <Folder Include="wwwroot\lib\platform\" />
   </ItemGroup>
 
 </Project>

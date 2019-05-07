@@ -4,6 +4,6 @@ namespace WebAnalytics.Presentation.ViewModels
 {
     public class RealtimeStatisticsViewModel
     {
-        public List<OnlineUserViewModel> OnlineUsers { get; set; }
+        public List<OnlineClientViewModel> OnlineClients { get; set; }
     }
 }

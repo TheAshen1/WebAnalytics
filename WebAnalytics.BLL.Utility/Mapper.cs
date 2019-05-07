@@ -21,19 +21,13 @@ namespace WebAnalytics.BLL.Mapper
         {
             return new ClientAction()
             {
-                Id = viewModel.Id,
-                Ip = viewModel.Ip,
+                ClientActionId = viewModel.ClientActionId,
+                ClientId = viewModel.ClientId,
                 ActionType = viewModel.ActionType,
                 Url = viewModel.Url,
                 FromUrl = viewModel.FromUrl,
                 DateTime = viewModel.DateTime ?? DateTime.Now,
                 Description = viewModel.Description,
-                Platform = viewModel.Platform,
-                PlatformVersion = viewModel.PlatformVersion,
-                OS = viewModel.OS,
-                OSVersion = viewModel.OSVersion,
-                OSArchitecture = viewModel.OSArchitecture,
-                Device = viewModel.Device
             };
         }
 
@@ -51,49 +45,61 @@ namespace WebAnalytics.BLL.Mapper
         {
             return new ClientActionViewModel()
             {
-                Id = entity.Id,
-                Ip = entity.Ip,
+                ClientActionId = entity.ClientActionId,
+                ClientId = entity.ClientId,
                 ActionType = entity.ActionType,
                 Url = entity.Url,
                 FromUrl = entity.FromUrl,
                 DateTime = entity.DateTime,
                 Description = entity.Description,
-                Platform = entity.Platform,
-                PlatformVersion = entity.PlatformVersion,
-                OS = entity.OS,
-                OSVersion = entity.OSVersion,
-                OSArchitecture = entity.OSArchitecture,
-                Device = entity.Device
             };
         }
 
-        public static List<ClientAction> Map(IList<AddClientActionViewModel> viewModels, string ip)
+        public static List<ClientAction> Map(IList<AddClientActionViewModel> viewModels, Guid clientId)
         {
             var entities = new List<ClientAction>();
             foreach (var viewModel in viewModels)
             {
-                entities.Add(Map(viewModel, ip));
+                entities.Add(Map(viewModel, clientId));
             }
             return entities;
         }
 
-        public static ClientAction Map(AddClientActionViewModel viewModel, string ip)
+        public static ClientAction Map(AddClientActionViewModel viewModel, Guid clientId)
         {
             return new ClientAction()
             {
-                Id = Guid.Empty,
-                Ip = ip,
+                ClientActionId = Guid.Empty,
+                ClientId = clientId,
                 ActionType = viewModel.ActionType,
                 Url = viewModel.Url,
                 FromUrl = viewModel.FromUrl,
                 DateTime = DateTime.Now,
                 Description = viewModel.Description,
-                Platform = viewModel.Platform,
-                PlatformVersion = viewModel.PlatformVersion,
-                OS = viewModel.OS,
-                OSVersion = viewModel.OSVersion,
-                OSArchitecture = viewModel.OSArchitecture,
-                Device = viewModel.Device
+            };
+        }
+
+        public static List<ClientViewModel> Map(IList<Client> entities)
+        {
+            var viewModels = new List<ClientViewModel>();
+            foreach (var entity in entities)
+            {
+                viewModels.Add(Map(entity));
+            }
+            return viewModels;
+        }
+
+        public static ClientViewModel Map(Client entity)
+        {
+            return new ClientViewModel()
+            {
+                ClientId = entity.ClientId,
+                Ip = entity.Ip,
+                Device = entity.Device,
+                Browser = entity.Browser,
+                BrowserVersion = entity.BrowserVersion,
+                Platform = entity.Platform,
+                PlatformVersion = entity.PlatformVersion
             };
         }
     }

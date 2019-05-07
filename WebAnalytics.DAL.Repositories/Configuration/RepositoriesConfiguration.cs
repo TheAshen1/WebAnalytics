@@ -11,7 +11,7 @@ namespace WebAnalytics.DAL.Repositories.Configuration
         {
             services.AddContext(configuration);
             services.AddScoped<IClientActionRepository, ClientActionRepository>();
-            services.AddScoped<IUniqueUsersCounterRepository, UniqueUsersCounterRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
             return services;
         }
     }

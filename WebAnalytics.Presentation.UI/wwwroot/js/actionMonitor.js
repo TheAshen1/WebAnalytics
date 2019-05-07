@@ -7,12 +7,6 @@
                 ActionType: monitor.ActionType.PageNavigation,
                 Url: document.URL,
                 FromUrl: document.referrer,
-                Platform: platform.name,
-                PlatformVersion: platform.version,
-                OS: platform.os.family,
-                OSVersion: platform.os.version,
-                OSArchitecture: platform.os.architecture,
-                Device: deviceDetector.device
             };
             monitor.registerAction(action);
 
@@ -22,12 +16,6 @@
                     ActionType: monitor.ActionType.Click,
                     Url: document.URL,
                     Description: description,
-                    Platform: platform.name,
-                    PlatformVersion: platform.version,
-                    OS: platform.os.family,
-                    OSVersion: platform.os.version,
-                    OSArchitecture: platform.os.architecture,
-                    Device: deviceDetector.device
                 };
                 monitor.registerAction(action);
             });

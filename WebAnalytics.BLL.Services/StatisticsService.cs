@@ -5,29 +5,36 @@ using WebAnalytics.Services.Interfaces;
 using WebAnalytics.Presentation.ViewModels;
 using System.Linq;
 using WebAnalytics.Misc.Common.Extensions;
+using System;
 
 namespace WebAnalytics.Services
 {
     public class StatisticsService : IStatisticsService
     {
         private readonly IClientActionRepository _clientActionRepository;
-        private readonly IUniqueUsersCounterRepository _uniqueUsersCounterRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public StatisticsService(IClientActionRepository clientActionRepository, IUniqueUsersCounterRepository uniqueUsersCounterRepository)
+        public StatisticsService(IClientActionRepository clientActionRepository, IClientRepository clientRepository)
         {
             _clientActionRepository = clientActionRepository;
-            _uniqueUsersCounterRepository = uniqueUsersCounterRepository;
+            _clientRepository = clientRepository;
         }
 
-        public void Add(AddClientActionViewModel clientActionViewModel, string ip)
+        public void Add(AddClientActionViewModel clientActionViewModel, Guid clientId)
         {
-            var entity = Mapper.Map(clientActionViewModel, ip);
+            var entity = Mapper.Map(clientActionViewModel, clientId);
             _clientActionRepository.Add(entity);
         }
 
         public List<ClientActionViewModel> GetAll()
         {
             var entities = _clientActionRepository.GetAll();
+            return Mapper.Map(entities);
+        }
+
+        public List<ClientViewModel> GetAllClients()
+        {
+            var entities = _clientRepository.GetAll();
             return Mapper.Map(entities);
         }
 
@@ -45,7 +52,7 @@ namespace WebAnalytics.Services
 
         public List<DeviceUsageStatisticsViewModel> GetDeviceUsageStatistics()
         {
-            var deviceUsage = _clientActionRepository.GetAll()
+            var deviceUsage = _clientRepository.GetAll()
                 .GroupBy(a => a.Device)
                 .Select(group => new DeviceUsageStatisticsViewModel()
                 {
@@ -85,7 +92,7 @@ namespace WebAnalytics.Services
         {
             return new TotalStatisticsViewModel()
             {
-                TotalUniqueUsersCount = _uniqueUsersCounterRepository.Get(),
+                TotalUniqueUsersCount = _clientRepository.GetCount(),
                 TotalPageViewsCount = _clientActionRepository.GetPageNavigationsCount(),
                 TotalClicksCount = _clientActionRepository.GetClicksCount(),
             };

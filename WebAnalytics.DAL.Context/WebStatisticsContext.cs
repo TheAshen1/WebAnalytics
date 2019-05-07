@@ -24,12 +24,12 @@ namespace WebAnalytics.DAL.Context
                     t => (ClientActionType)Enum.Parse(typeof(ClientActionType), t));
 
             modelBuilder
-                .Entity<UniqueUser>()
-                .Property(et => et.Id)
+                .Entity<Client>()
+                .Property(et => et.ClientId)
                 .ValueGeneratedNever();
         }
 
         public DbSet<ClientAction> ClientActions { get; set; }
-        public DbSet<UniqueUser> UniqueUsers { get; set; }
+        public DbSet<Client> UniqueClients { get; set; }
     }
 }

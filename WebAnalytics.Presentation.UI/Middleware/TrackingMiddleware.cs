@@ -3,6 +3,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UAParser;
+using Wangkanai.Detection;
 using WebAnalytics.DAL.Repositories.Interfaces;
 using WebAnalytics.Presentation.ViewModels;
 
@@ -16,39 +18,59 @@ namespace WebAnalytics.UI.Middleware
         private readonly static string _key = "Id";
 
         public static int CookiesCreatedCount { get; set; }
-        public static ConcurrentDictionary<string, OnlineUserViewModel> OnlineUsers { get; set; } = new ConcurrentDictionary<string, OnlineUserViewModel>();
+        public static ConcurrentDictionary<string, OnlineClientViewModel> OnlineClients { get; set; } = new ConcurrentDictionary<string, OnlineClientViewModel>();
 
         public TrackingMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IUniqueUsersCounterRepository uniqueUsersCounter)
+        public async Task Invoke(
+            HttpContext context,
+            IDeviceResolver deviceResolver,
+            IBrowserResolver browserResolver,
+            IClientRepository clientRepository)
         {
-            var userCookieId = context.Request.Cookies.ContainsKey(_key);
-            if (!userCookieId)
+            if (!deviceResolver.Device.Crawler)
             {
-                context.Response.Cookies.Append(_key, Guid.NewGuid().ToString());
-                uniqueUsersCounter.Increment();
+                Guid clientId = Guid.Empty;
+                Guid sessionId = Guid.Empty;
+
+                var cookieId = context.Request.Cookies[_key];
+                var isExistingUser = context.Request.Cookies.ContainsKey(_key);
+                if (!isExistingUser || !Guid.TryParse(cookieId, out clientId))
+                {
+                    clientId = Guid.NewGuid();
+                    var userAgent = deviceResolver.UserAgent.ToString();
+                    var uaParser = Parser.GetDefault();
+                    ClientInfo clientInfo = uaParser.Parse(userAgent);
+                    context.Response.Cookies.Append(_key, clientId.ToString());
+                    var newClient = new DAL.Entities.Client()
+                    {
+                        ClientId = clientId,
+                        Ip = context.Connection.RemoteIpAddress.ToString(),
+                        Device = deviceResolver.Device.Type.ToString(),
+                        Browser = browserResolver.Browser.Type.ToString(),
+                        BrowserVersion = browserResolver.Browser.Version.ToString(),
+                        Platform = clientInfo.OS.Family,
+                        PlatformVersion = clientInfo.OS.Major,
+                    };
+                    clientRepository.Add(newClient);
+                }
+                var onlineClient = new OnlineClientViewModel()
+                {
+                    ClientId = clientId,
+                    Ip = context.Connection.RemoteIpAddress.ToString(),
+                    UserAgent = deviceResolver.UserAgent.ToString(),
+                    LastActivity = DateTime.Now
+                };
+                OnlineClients.AddOrUpdate(clientId.ToString(), onlineClient, (key, value) => { value.LastActivity = DateTime.Now; return value; });
             }
-            var userSessionId = context.Session.GetString(_key);
-            if (userSessionId is null)
-            {
-                userSessionId = Guid.NewGuid().ToString();
-                context.Session.SetString(_key, userSessionId);
-            }
-            var user = new OnlineUserViewModel()
-            {
-                Ip = context.Connection.RemoteIpAddress.ToString(),
-                UserAgent = context.Request.Headers["User-Agent"].ToString(),
-                LastActivity = DateTime.Now
-            };
-            OnlineUsers.AddOrUpdate(userSessionId, user, (key, value) => { value.LastActivity = DateTime.Now; return value; });
-            foreach (var item in OnlineUsers)
+            foreach (var item in OnlineClients)
             {
                 if ((DateTime.Now - item.Value.LastActivity).Seconds >= _timeout)
                 {
-                    OnlineUsers.Remove(item.Key, out OnlineUserViewModel deletedUser);
+                    OnlineClients.Remove(item.Key, out OnlineClientViewModel deletedUser);
                 }
             }
             await _next(context);

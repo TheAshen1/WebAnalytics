@@ -2,6 +2,8 @@
     ViewData["Title"] = "Dashboard";
 }
 
+<link rel="stylesheet" type="text/css" href="~/lib/chart/Chart.min.css">
+
 <h1>Dashboard</h1>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -19,7 +21,7 @@
     <div class="tab-pane fade show active" id="realtime" role="tabpanel" aria-labelledby="realtime-tab">
         <h3>Open sessions</h3>
         <div class="table-responsive">
-            <table id="onlineUsers" class="table table-bordered ">
+            <table id="onlineClients" class="table table-bordered ">
                 <thead></thead>
                 <tbody></tbody>
             </table>
@@ -27,9 +29,17 @@
     </div>
     <div class="tab-pane fade" id="total" role="tabpanel" aria-labelledby="total-tab">
         <h3>Total statistics</h3>
-        <h4>Unique users count: <span id="totalUniqueUsersCount"/></h4>
-        <h4>Total page views count: <span id="totalPageViewsCount"/></h4>
-        <h4>Total clicks count: <span id="totalClicksCount"/></h4>
+        <h4>Unique users count: <span id="totalUniqueUsersCount" /></h4>
+        <h4>Total page views count: <span id="totalPageViewsCount" /></h4>
+        <h4>Total clicks count: <span id="totalClicksCount" /></h4>
+        <h4>All clients</h4>
+        <div class="table-responsive">
+            <table id="clients" class="table table-bordered ">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <canvas id="deviceUsage"></canvas>
     </div>
     <div class="tab-pane fade" id="behaiviour" role="tabpanel" aria-labelledby="behaiviour-tab">
         <h3>All user actions</h3>
@@ -54,11 +64,10 @@
                 <tbody></tbody>
             </table>
         </div>
-        <h3>Individual page views</h3>
-        <div id="pageViewsGrid" class="grid"></div>
     </div>
 </div>
 
 @section Scripts {
+    <script src="~/lib/chart/Chart.min.js" asp-append-version="true"></script>
     <script src="~/js/dashboard.js" asp-append-version="true"></script>
 }
