@@ -8,55 +8,60 @@ using WebAnalytics.Misc.Common.Extensions;
 
 namespace WebAnalytics.DAL.Repositories
 {
-    public class ClientActionRepository : IClientActionRepository
+    public class ActionRepository : IActionRepository
     {
         private readonly WebStatisticsContext _context;
 
-        public ClientActionRepository(WebStatisticsContext context)
+        public ActionRepository(WebStatisticsContext context)
         {
             _context = context;
         }
 
-        public void Add(ClientAction clientAction)
+        public void Add(Action clientAction)
         {
-            _context.ClientActions.Add(clientAction);
+            _context.Actions.Add(clientAction);
             _context.SaveChanges();
         }
 
-        public List<ClientAction> GetAll()
+        public List<Action> GetAll()
         {
-            return _context.ClientActions.ToList();
+            return _context.Actions.ToList();
         }
 
-        public List<ClientAction> GetClicks()
+        public List<Action> GetClicks()
         {
-            return _context.ClientActions
+            return _context.Actions
                 .Where(a => a.ActionType == ClientActionType.Click)
                 .ToList();
         }
 
         public int GetClicksCount()
         {
-            return _context.ClientActions
+            return _context.Actions
                 .Where(a => a.ActionType == ClientActionType.Click)
                 .Count();
         }
 
-        public PagedResult<ClientAction> GetPage(int page, int pageSize)
+        public PagedResult<Action> GetClientActionsPage(int page, int pageSize)
         {
-            return _context.ClientActions.GetPaged(page, pageSize);
+            return _context.Actions.GetPaged(page, pageSize);
         }
 
-        public List<ClientAction> GetPageNavigations()
+        public PagedResult<Client> GetClientsPage(int page, int pageSize)
         {
-            return _context.ClientActions
+            return _context.Clients.GetPaged(page, pageSize);
+        }
+
+        public List<Action> GetPageNavigations()
+        {
+            return _context.Actions
                 .Where(a => a.ActionType == ClientActionType.PageNavigation)
                 .ToList();
         }
 
         public int GetPageNavigationsCount()
         {
-            return _context.ClientActions
+            return _context.Actions
                 .Where(a => a.ActionType == ClientActionType.PageNavigation)
                 .Count();
         }

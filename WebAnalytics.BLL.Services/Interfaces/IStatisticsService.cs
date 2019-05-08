@@ -7,13 +7,15 @@ namespace WebAnalytics.Services.Interfaces
 {
     public interface IStatisticsService
     {
-        void Add(AddClientActionViewModel clientActionViewModel, Guid clientId);
-        List<ClientActionViewModel> GetAll();
+        void Add(AddActionViewModel clientActionViewModel, Guid clientId);
+        List<ActionViewModel> GetAll();
         List<PageViewCountViewModel> GetPageViewStatistics();
         List<ClickStatisticsViewModel> GetClickStatistics();
-        PagedResult<ClientActionViewModel> GetPage(int page, int pageSize);
+        PagedResult<ActionViewModel> GetClientActionsPage(int page, int pageSize);
         List<DeviceUsageStatisticsViewModel> GetDeviceUsageStatistics();
         TotalStatisticsViewModel GetTotalStatistics();
         List<ClientViewModel> GetAllClients();
+        List<DailyViewStatisticsViewModel> GetDailyViewStatistics();
+        PagedResult<ClientViewModel> GetClientsPage(int page, int pageSize);
     }
 }

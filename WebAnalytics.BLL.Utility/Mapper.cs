@@ -7,9 +7,9 @@ namespace WebAnalytics.BLL.Mapper
 {
     public static class Mapper
     {
-        public static List<ClientAction> Map(IList<ClientActionViewModel> viewModels)
+        public static List<DAL.Entities.Action> Map(IList<ActionViewModel> viewModels)
         {
-            var entities = new List<ClientAction>();
+            var entities = new List<DAL.Entities.Action>();
             foreach (var viewModel in viewModels)
             {
                 entities.Add(Map(viewModel));
@@ -17,11 +17,11 @@ namespace WebAnalytics.BLL.Mapper
             return entities;
         }
 
-        public static ClientAction Map(ClientActionViewModel viewModel)
+        public static DAL.Entities.Action Map(ActionViewModel viewModel)
         {
-            return new ClientAction()
+            return new DAL.Entities.Action()
             {
-                ClientActionId = viewModel.ClientActionId,
+                ActionId = viewModel.ActionId,
                 ClientId = viewModel.ClientId,
                 ActionType = viewModel.ActionType,
                 Url = viewModel.Url,
@@ -31,9 +31,9 @@ namespace WebAnalytics.BLL.Mapper
             };
         }
 
-        public static List<ClientActionViewModel> Map(IList<ClientAction> entities)
+        public static List<ActionViewModel> Map(IList<DAL.Entities.Action> entities)
         {
-            var viewModels = new List<ClientActionViewModel>();
+            var viewModels = new List<ActionViewModel>();
             foreach (var entity in entities)
             {
                 viewModels.Add(Map(entity));
@@ -41,11 +41,11 @@ namespace WebAnalytics.BLL.Mapper
             return viewModels;
         }
 
-        public static ClientActionViewModel Map(ClientAction entity)
+        public static ActionViewModel Map(DAL.Entities.Action entity)
         {
-            return new ClientActionViewModel()
+            return new ActionViewModel()
             {
-                ClientActionId = entity.ClientActionId,
+                ActionId = entity.ActionId,
                 ClientId = entity.ClientId,
                 ActionType = entity.ActionType,
                 Url = entity.Url,
@@ -55,9 +55,9 @@ namespace WebAnalytics.BLL.Mapper
             };
         }
 
-        public static List<ClientAction> Map(IList<AddClientActionViewModel> viewModels, Guid clientId)
+        public static List<DAL.Entities.Action> Map(IList<AddActionViewModel> viewModels, Guid clientId)
         {
-            var entities = new List<ClientAction>();
+            var entities = new List<DAL.Entities.Action>();
             foreach (var viewModel in viewModels)
             {
                 entities.Add(Map(viewModel, clientId));
@@ -65,15 +65,15 @@ namespace WebAnalytics.BLL.Mapper
             return entities;
         }
 
-        public static ClientAction Map(AddClientActionViewModel viewModel, Guid clientId)
+        public static DAL.Entities.Action Map(AddActionViewModel viewModel, Guid clientId)
         {
-            return new ClientAction()
+            return new DAL.Entities.Action()
             {
-                ClientActionId = Guid.Empty,
+                ActionId = Guid.Empty,
                 ClientId = clientId,
                 ActionType = viewModel.ActionType,
                 Url = viewModel.Url,
-                FromUrl = viewModel.FromUrl,
+                FromUrl = String.IsNullOrWhiteSpace(viewModel.FromUrl) ? null : viewModel.FromUrl,
                 DateTime = DateTime.Now,
                 Description = viewModel.Description,
             };

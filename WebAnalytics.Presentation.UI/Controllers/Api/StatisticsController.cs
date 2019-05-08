@@ -22,29 +22,33 @@ namespace WebAnalytics.UI.Controllers.Api
         }
 
         [HttpPost]
-        public ActionResult RegisterAction([FromBody]AddClientActionViewModel action)
+        public ActionResult RegisterAction([FromBody]AddActionViewModel action)
         {
             var cookieId = HttpContext.Request.Cookies["Id"];
             if(Guid.TryParse(cookieId, out Guid clientId))
             {
+                if(action.ActionType == Misc.Common.Enums.ClientActionType.PageNavigation)
+                {
+
+                }
                 _statisticsService.Add(action, clientId);
                 return Ok();
             }
             return BadRequest();
         }
 
-        [HttpGet("ClientActions")]
-        public ActionResult<List<ClientActionViewModel>> GetAllRegisteredActions()
+        [HttpGet("Actions")]
+        public ActionResult<List<ActionViewModel>> GetAllRegisteredActions()
         {
             var clientActions = _statisticsService.GetAll();
             return clientActions;
         }
 
-        [HttpGet("ClientActionsPage/{page?}")]
-        public ActionResult<PagedResult<ClientActionViewModel>> GetClientActionsPage(int? page)
+        [HttpGet("ActionsPage/{page?}")]
+        public ActionResult<PagedResult<ActionViewModel>> GetClientActionsPage(int? page)
         {
             var pageSize = 5;
-            var clientActions = _statisticsService.GetPage(page ?? 1, pageSize);
+            var clientActions = _statisticsService.GetClientActionsPage(page ?? 1, pageSize);
             return clientActions;
         }
 
@@ -90,6 +94,21 @@ namespace WebAnalytics.UI.Controllers.Api
         {
             var clients = _statisticsService.GetAllClients();
             return clients;
+        }
+
+        [HttpGet("ClientsPage/{page?}")]
+        public ActionResult<PagedResult<ClientViewModel>> GetClientsPage(int? page)
+        {
+            var pageSize = 5;
+            var clients = _statisticsService.GetClientsPage(page ?? 1, pageSize);
+            return clients;
+        }
+
+        [HttpGet("DailyViews")]
+        public ActionResult<List<DailyViewStatisticsViewModel>> GetDailyViewStatistics()
+        {
+            var views = _statisticsService.GetDailyViewStatistics();
+            return views;
         }
     }
 }

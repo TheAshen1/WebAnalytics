@@ -2,7 +2,7 @@
 
 namespace WebAnalytics.Presentation.ViewModels
 {
-    public class AddClientActionViewModel
+    public class AddActionViewModel
     {
         public ClientActionType ActionType { get; set; }
         public string Url { get; set; }

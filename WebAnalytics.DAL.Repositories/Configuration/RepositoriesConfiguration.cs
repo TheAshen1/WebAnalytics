@@ -10,7 +10,7 @@ namespace WebAnalytics.DAL.Repositories.Configuration
         public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddContext(configuration);
-            services.AddScoped<IClientActionRepository, ClientActionRepository>();
+            services.AddScoped<IActionRepository, ActionRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             return services;
         }

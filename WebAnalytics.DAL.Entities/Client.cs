@@ -13,6 +13,6 @@ namespace WebAnalytics.DAL.Entities
         public string Platform { get; set; }
         public string PlatformVersion { get; set; }
 
-        public List<ClientAction> Actions { get; set; }
+        public List<Action> Actions { get; set; }
     }
 }

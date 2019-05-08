@@ -3,9 +3,9 @@ using WebAnalytics.Misc.Common.Enums;
 
 namespace WebAnalytics.Presentation.ViewModels
 {
-    public class ClientActionViewModel
+    public class ActionViewModel
     {
-        public Guid ClientActionId { get; set; }
+        public Guid ActionId { get; set; }
         public Guid ClientId { get; set; }
         //public string Ip { get; set; }
         public ClientActionType ActionType { get; set; }

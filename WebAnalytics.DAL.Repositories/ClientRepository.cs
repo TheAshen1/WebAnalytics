@@ -18,23 +18,23 @@ namespace WebAnalytics.DAL.Repositories
 
         public void Add(Client uniqueUser)
         {
-            _context.UniqueClients.Add(uniqueUser);
+            _context.Clients.Add(uniqueUser);
             _context.SaveChanges();
         }
 
         public List<Client> GetAll()
         {
-            return _context.UniqueClients.ToList();
+            return _context.Clients.ToList();
         }
 
         public int GetCount()
         {
-            return _context.UniqueClients.Count();
+            return _context.Clients.Count();
         }
 
-        public PagedResult<ClientAction> GetPage(int page, int pageSize)
+        public PagedResult<Action> GetPage(int page, int pageSize)
         {
-            return _context.ClientActions.GetPaged(page, pageSize);
+            return _context.Actions.GetPaged(page, pageSize);
         }
     }
 }

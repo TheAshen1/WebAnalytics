@@ -11,22 +11,22 @@ namespace WebAnalytics.Services
 {
     public class StatisticsService : IStatisticsService
     {
-        private readonly IClientActionRepository _clientActionRepository;
+        private readonly IActionRepository _clientActionRepository;
         private readonly IClientRepository _clientRepository;
 
-        public StatisticsService(IClientActionRepository clientActionRepository, IClientRepository clientRepository)
+        public StatisticsService(IActionRepository clientActionRepository, IClientRepository clientRepository)
         {
             _clientActionRepository = clientActionRepository;
             _clientRepository = clientRepository;
         }
 
-        public void Add(AddClientActionViewModel clientActionViewModel, Guid clientId)
+        public void Add(AddActionViewModel clientActionViewModel, Guid clientId)
         {
             var entity = Mapper.Map(clientActionViewModel, clientId);
             _clientActionRepository.Add(entity);
         }
 
-        public List<ClientActionViewModel> GetAll()
+        public List<ActionViewModel> GetAll()
         {
             var entities = _clientActionRepository.GetAll();
             return Mapper.Map(entities);
@@ -40,7 +40,8 @@ namespace WebAnalytics.Services
 
         public List<ClickStatisticsViewModel> GetClickStatistics()
         {
-            var clickStatistics = _clientActionRepository.GetClicks()
+            var clickStatistics = _clientActionRepository
+                .GetClicks()
                 .GroupBy(a => a.Description)
                 .Select(group => new ClickStatisticsViewModel()
                 {
@@ -50,9 +51,23 @@ namespace WebAnalytics.Services
             return clickStatistics;
         }
 
+        public List<DailyViewStatisticsViewModel> GetDailyViewStatistics()
+        {
+            var dailyViews = _clientActionRepository
+                .GetPageNavigations()
+                .GroupBy(a => new DateTime(a.DateTime.Year, a.DateTime.Month, a.DateTime.Day))
+                .Select(group => new DailyViewStatisticsViewModel()
+                {
+                    DateTime = group.Key,
+                    Count = group.Count(),
+                }).ToList();
+            return dailyViews;
+        }
+
         public List<DeviceUsageStatisticsViewModel> GetDeviceUsageStatistics()
         {
-            var deviceUsage = _clientRepository.GetAll()
+            var deviceUsage = _clientRepository
+                .GetAll()
                 .GroupBy(a => a.Device)
                 .Select(group => new DeviceUsageStatisticsViewModel()
                 {
@@ -62,10 +77,10 @@ namespace WebAnalytics.Services
             return deviceUsage;
         }
 
-        public PagedResult<ClientActionViewModel> GetPage(int page, int pageSize)
+        public PagedResult<ActionViewModel> GetClientActionsPage(int page, int pageSize)
         {
-            var entitiesPage = _clientActionRepository.GetPage(page, pageSize);
-            var viewModelsPage = new PagedResult<ClientActionViewModel>()
+            var entitiesPage = _clientActionRepository.GetClientActionsPage(page, pageSize);
+            var viewModelsPage = new PagedResult<ActionViewModel>()
             {
                 CurrentPage = entitiesPage.CurrentPage,
                 PageCount = entitiesPage.PageCount,
@@ -78,7 +93,8 @@ namespace WebAnalytics.Services
 
         public List<PageViewCountViewModel> GetPageViewStatistics()
         {
-            var pageViews = _clientActionRepository.GetPageNavigations()
+            var pageViews = _clientActionRepository
+                .GetPageNavigations()
                 .GroupBy(a => a.Url)
                 .Select(group => new PageViewCountViewModel()
                 {
@@ -96,6 +112,20 @@ namespace WebAnalytics.Services
                 TotalPageViewsCount = _clientActionRepository.GetPageNavigationsCount(),
                 TotalClicksCount = _clientActionRepository.GetClicksCount(),
             };
+        }
+
+        public PagedResult<ClientViewModel> GetClientsPage(int page, int pageSize)
+        {
+            var entitiesPage = _clientActionRepository.GetClientsPage(page, pageSize);
+            var viewModelsPage = new PagedResult<ClientViewModel>()
+            {
+                CurrentPage = entitiesPage.CurrentPage,
+                PageCount = entitiesPage.PageCount,
+                PageSize = entitiesPage.PageSize,
+                RowCount = entitiesPage.RowCount,
+                Results = Mapper.Map(entitiesPage.Results)
+            };
+            return viewModelsPage;
         }
     }
 }

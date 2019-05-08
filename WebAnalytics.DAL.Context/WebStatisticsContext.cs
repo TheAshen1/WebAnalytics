@@ -17,7 +17,7 @@ namespace WebAnalytics.DAL.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Entity<ClientAction>()
+                .Entity<Entities.Action>()
                 .Property(a => a.ActionType)
                 .HasConversion(
                     t => t.ToString(),
@@ -29,7 +29,8 @@ namespace WebAnalytics.DAL.Context
                 .ValueGeneratedNever();
         }
 
-        public DbSet<ClientAction> ClientActions { get; set; }
-        public DbSet<Client> UniqueClients { get; set; }
+        public DbSet<Entities.Action> Actions { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<TimeOnPage> TimesOnPages { get; set; }
     }
 }

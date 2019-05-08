@@ -3,9 +3,9 @@ using WebAnalytics.Misc.Common.Enums;
 
 namespace WebAnalytics.DAL.Entities
 {
-    public class ClientAction
+    public class Action
     {
-        public Guid ClientActionId { get; set; }
+        public Guid ActionId { get; set; }
         public ClientActionType ActionType { get; set; }
         public string Url { get; set; }
         public string FromUrl { get; set; }

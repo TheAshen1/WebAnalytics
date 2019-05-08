@@ -29,27 +29,31 @@
     </div>
     <div class="tab-pane fade" id="total" role="tabpanel" aria-labelledby="total-tab">
         <h3>Total statistics</h3>
-        <h4>Unique users count: <span id="totalUniqueUsersCount" /></h4>
-        <h4>Total page views count: <span id="totalPageViewsCount" /></h4>
-        <h4>Total clicks count: <span id="totalClicksCount" /></h4>
-        <h4>All clients</h4>
+        <h4>Unique clients: <span id="totalUniqueUsersCount" /></h4>
+        <h4>Total page views: <span id="totalPageViewsCount" /></h4>
+        <h4>Total clicks: <span id="totalClicksCount" /></h4>
+        <h3>All clients</h3>
         <div class="table-responsive">
             <table id="clients" class="table table-bordered ">
                 <thead></thead>
                 <tbody></tbody>
             </table>
+            <div class="paginator"></div>
         </div>
-        <canvas id="deviceUsage"></canvas>
+        <h3>Device usage data</h3>
+        <canvas id="deviceUsage" width="600" height="400"></canvas>
     </div>
     <div class="tab-pane fade" id="behaiviour" role="tabpanel" aria-labelledby="behaiviour-tab">
-        <h3>All user actions</h3>
+        <h3>All actions</h3>
         <div class="table-responsive">
-            <table id="allActions" class="table table-bordered ">
+            <table id="actions" class="table table-bordered ">
                 <thead></thead>
                 <tbody></tbody>
             </table>
             <div class="paginator"></div>
         </div>
+        <h3>Daily views</h3>
+        <canvas id="dailyViews" width="600" height="400"></canvas>
         <h3>Page views</h3>
         <div class="table-responsive">
             <table id="pageViews" class="table table-bordered ">
