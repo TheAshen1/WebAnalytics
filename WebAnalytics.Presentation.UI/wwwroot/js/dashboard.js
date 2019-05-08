@@ -87,6 +87,20 @@
                     console.error(e);
                 }
             });
+
+            $.ajax({
+                url: "/api/Statistics/AverageTimeOnPage",
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        dashboard.buildGrid("averageTimeOnPage", data);
+                    }
+                },
+                error: function (e) {
+                    console.error(e);
+                }
+            });
+
         });
 
         buildGrid = function (gridId, data) {

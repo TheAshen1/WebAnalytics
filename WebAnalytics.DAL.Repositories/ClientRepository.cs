@@ -16,9 +16,9 @@ namespace WebAnalytics.DAL.Repositories
             _context = context;
         }
 
-        public void Add(Client uniqueUser)
+        public void Add(Client client)
         {
-            _context.Clients.Add(uniqueUser);
+            _context.Clients.Add(client);
             _context.SaveChanges();
         }
 

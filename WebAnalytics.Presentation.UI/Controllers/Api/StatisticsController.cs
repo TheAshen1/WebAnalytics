@@ -27,10 +27,6 @@ namespace WebAnalytics.UI.Controllers.Api
             var cookieId = HttpContext.Request.Cookies["Id"];
             if(Guid.TryParse(cookieId, out Guid clientId))
             {
-                if(action.ActionType == Misc.Common.Enums.ClientActionType.PageNavigation)
-                {
-
-                }
                 _statisticsService.Add(action, clientId);
                 return Ok();
             }
@@ -109,6 +105,13 @@ namespace WebAnalytics.UI.Controllers.Api
         {
             var views = _statisticsService.GetDailyViewStatistics();
             return views;
+        }
+
+        [HttpGet("AverageTimeOnPage")]
+        public ActionResult<List<AverageTimeOnPageViewModel>> GetAverageTimeOnPageStatistics()
+        {
+            var statistics = _statisticsService.GetAverageTimeOnPageStatistics();
+            return statistics;
         }
     }
 }

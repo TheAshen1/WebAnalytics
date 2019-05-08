@@ -17,5 +17,7 @@ namespace WebAnalytics.Services.Interfaces
         List<ClientViewModel> GetAllClients();
         List<DailyViewStatisticsViewModel> GetDailyViewStatistics();
         PagedResult<ClientViewModel> GetClientsPage(int page, int pageSize);
+        List<AverageTimeOnPageViewModel> GetAverageTimeOnPageStatistics();
+        //void CalculateAndSaveTimeOnPage(AddActionViewModel clientActionViewModel, Guid clientId);
     }
 }

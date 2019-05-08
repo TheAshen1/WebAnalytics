@@ -16,5 +16,6 @@ namespace WebAnalytics.DAL.Repositories.Interfaces
 
         PagedResult<Action> GetClientActionsPage(int page, int pageSize);
         PagedResult<Client> GetClientsPage(int page, int pageSize);
+        Action GetLastClientPageNavigation(System.Guid clientId);
     }
 }

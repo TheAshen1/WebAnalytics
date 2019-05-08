@@ -12,6 +12,7 @@ namespace WebAnalytics.DAL.Repositories.Configuration
             services.AddContext(configuration);
             services.AddScoped<IActionRepository, ActionRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<ITimeOnPageRepository, TimeOnPageRepository>();
             return services;
         }
     }

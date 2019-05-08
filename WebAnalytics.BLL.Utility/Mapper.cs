@@ -26,7 +26,7 @@ namespace WebAnalytics.BLL.Mapper
                 ActionType = viewModel.ActionType,
                 Url = viewModel.Url,
                 FromUrl = viewModel.FromUrl,
-                DateTime = viewModel.DateTime ?? DateTime.Now,
+                DateTime = viewModel.DateTime,
                 Description = viewModel.Description,
             };
         }

@@ -17,9 +17,9 @@ namespace WebAnalytics.DAL.Repositories
             _context = context;
         }
 
-        public void Add(Action clientAction)
+        public void Add(Action action)
         {
-            _context.Actions.Add(clientAction);
+            _context.Actions.Add(action);
             _context.SaveChanges();
         }
 
@@ -64,6 +64,14 @@ namespace WebAnalytics.DAL.Repositories
             return _context.Actions
                 .Where(a => a.ActionType == ClientActionType.PageNavigation)
                 .Count();
+        }
+
+        public Action GetLastClientPageNavigation(System.Guid clientId)
+        {
+            return _context.Actions
+                .Where(a => a.ClientId == clientId)
+                .OrderByDescending(a => a.DateTime)
+                .FirstOrDefault();
         }
     }
 }
