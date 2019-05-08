@@ -29,7 +29,8 @@
     </div>
     <div class="tab-pane fade" id="total" role="tabpanel" aria-labelledby="total-tab">
         <h3>Total statistics</h3>
-        <h4>Unique clients: <span id="totalUniqueUsersCount" /></h4>
+        <a asp-controller="ReportGenerator" asp-action="TotalStatistics">Download report</a>
+        <h4>Total users: <span id="totalUniqueUsersCount" /></h4>
         <h4>Total page views: <span id="totalPageViewsCount" /></h4>
         <h4>Total clicks: <span id="totalClicksCount" /></h4>
         <h3>All clients</h3>

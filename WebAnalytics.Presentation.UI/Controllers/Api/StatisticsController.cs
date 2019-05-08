@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using WebAnalytics.Misc.Common.Extensions;
 using WebAnalytics.Presentation.ViewModels;
 using WebAnalytics.Services.Interfaces;
@@ -25,7 +27,7 @@ namespace WebAnalytics.UI.Controllers.Api
         public ActionResult RegisterAction([FromBody]AddActionViewModel action)
         {
             var cookieId = HttpContext.Request.Cookies["Id"];
-            if(Guid.TryParse(cookieId, out Guid clientId))
+            if (Guid.TryParse(cookieId, out Guid clientId))
             {
                 _statisticsService.Add(action, clientId);
                 return Ok();

@@ -52,7 +52,7 @@
                 type: "GET",
                 success: function (data) {
                     if (data) {
-                        $("#totalUniqueUsersCount").text(data.totalUniqueUsersCount);
+                        $("#totalUniqueUsersCount").text(data.totalUsersCount);
                         $("#totalPageViewsCount").text(data.totalPageViewsCount);
                         $("#totalClicksCount").text(data.totalClicksCount);
                     }

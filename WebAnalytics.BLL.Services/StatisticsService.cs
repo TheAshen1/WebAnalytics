@@ -128,7 +128,7 @@ namespace WebAnalytics.Services
         {
             return new TotalStatisticsViewModel()
             {
-                TotalUniqueUsersCount = _clientRepository.GetCount(),
+                TotalUsersCount = _clientRepository.GetCount(),
                 TotalPageViewsCount = _actionRepository.GetPageNavigationsCount(),
                 TotalClicksCount = _actionRepository.GetClicksCount(),
             };
