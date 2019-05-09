@@ -46,7 +46,7 @@ namespace WebAnalytics.Presentation.UI.Controllers
                     return Redirect("/");
                 }
             }
-            return View(returnUrl);
+            return Redirect("AccessDenied");
         }
 
         public IActionResult AccessDenied()
