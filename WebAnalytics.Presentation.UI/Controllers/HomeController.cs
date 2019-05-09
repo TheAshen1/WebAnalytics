@@ -1,6 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using WebAnalytics.Presentation.ViewModels;
@@ -20,7 +19,6 @@ namespace WebAnalytics.UI.Controllers
 
         public IActionResult Index()
         {
-            //HttpContext.Session.Set("test", Encoding.Unicode.GetBytes("something"));
             return View(new HomeViewModel { UserCount = TrackingMiddleware.OnlineClients.Count, SessionId = HttpContext.Session.Id, UserInfo = _memoryCache.Get<string>(HttpContext.Session.Id) });
         }
 
@@ -29,6 +27,7 @@ namespace WebAnalytics.UI.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Dashboard()
         {
             return View();

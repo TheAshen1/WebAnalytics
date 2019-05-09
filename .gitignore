@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /WebAnalytics.Presentation.UI/WebStatistics.db
+/WebAnalytics.Presentation.UI/Identity.db

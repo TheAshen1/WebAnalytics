@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebAnalytics.BLL.Services\WebAnalytics.BLL.Services.csproj" />
+    <ProjectReference Include="..\WebAnalytics.Identity\WebAnalytics.Misc.Identity.csproj" />
     <ProjectReference Include="..\WebAnalytics.Presentation.ViewModels\WebAnalytics.Presentation.ViewModels.csproj" />
   </ItemGroup>
 
