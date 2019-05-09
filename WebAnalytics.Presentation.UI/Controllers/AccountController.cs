@@ -25,17 +25,23 @@ namespace WebAnalytics.Presentation.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password, string returnUrl = null)
+        public async Task<IActionResult> Login(string login, string password, string returnUrl = null)
         {
-            if (ValidateLogin(userName, password))
+            if (ValidateLogin(login, password))
             {
                 var claims = new List<Claim>
                 {
-                    new Claim("user", userName),
+                    new Claim("user", login),
                     new Claim("role", "Admin")
                 };
 
-                await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")));
+                await HttpContext.SignInAsync(
+                    new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")),
+                    new AuthenticationProperties
+                    {
+                        ExpiresUtc = DateTime.UtcNow.AddHours(1),
+                        IsPersistent = true
+                    });
 
                 if (Url.IsLocalUrl(returnUrl))
                 {
@@ -54,9 +60,9 @@ namespace WebAnalytics.Presentation.UI.Controllers
             return View();
         }
 
-        private bool ValidateLogin(string userName, string password)
+        private bool ValidateLogin(string login, string password)
         {
-            return _identityContext.Users.Where(u => u.Login == userName && u.Password == password).Any();
+            return _identityContext.Users.Where(u => u.Login == login && u.Password == password).Any();
         }
 
         public async Task<IActionResult> Logout()

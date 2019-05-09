@@ -44,6 +44,8 @@ namespace WebAnalytics.UI
                     {
                         options.AccessDeniedPath = "/Account/AccessDenied";
                         options.LoginPath = "/Account/Login";
+                        options.SlidingExpiration = true;
+                        options.ExpireTimeSpan = TimeSpan.FromHours(1);
                     });
 
             services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>, ConfigureCookie>();

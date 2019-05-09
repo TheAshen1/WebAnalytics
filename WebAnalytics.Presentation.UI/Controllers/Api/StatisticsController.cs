@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
@@ -35,6 +36,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return BadRequest();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Actions")]
         public ActionResult<List<ActionViewModel>> GetAllRegisteredActions()
         {
@@ -42,6 +44,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return clientActions;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("ActionsPage/{page?}")]
         public ActionResult<PagedResult<ActionViewModel>> GetClientActionsPage(int? page)
         {
@@ -50,6 +53,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return clientActions;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("PageViews")]
         public ActionResult<List<PageViewCountViewModel>> GetPageViewStatistics()
         {
@@ -57,6 +61,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return pageViews;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Clicks")]
         public ActionResult<List<ClickStatisticsViewModel>> GetClickStatistics()
         {
@@ -64,6 +69,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return clickStatistics;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Realtime")]
         public ActionResult<RealtimeStatisticsViewModel> GetRealtimeStatistics()
         {
@@ -73,6 +79,7 @@ namespace WebAnalytics.UI.Controllers.Api
             };
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("DeviceUsage")]
         public ActionResult<List<DeviceUsageStatisticsViewModel>> GetDeviceUsageStatistics()
         {
@@ -80,6 +87,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return statistics;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Total")]
         public ActionResult<TotalStatisticsViewModel> GetTotalStatistics()
         {
@@ -87,6 +95,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return totalStatistics;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Clients")]
         public ActionResult<List<ClientViewModel>> GetAllClients()
         {
@@ -94,6 +103,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return clients;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("ClientsPage/{page?}")]
         public ActionResult<PagedResult<ClientViewModel>> GetClientsPage(int? page)
         {
@@ -102,6 +112,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return clients;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("DailyViews")]
         public ActionResult<List<DailyViewStatisticsViewModel>> GetDailyViewStatistics()
         {
@@ -109,6 +120,7 @@ namespace WebAnalytics.UI.Controllers.Api
             return views;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("AverageTimeOnPage")]
         public ActionResult<List<AverageTimeOnPageViewModel>> GetAverageTimeOnPageStatistics()
         {

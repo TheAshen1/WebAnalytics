@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using WebAnalytics.Services.Interfaces;
 
@@ -13,6 +14,7 @@ namespace WebAnalytics.Presentation.UI.Controllers
             _statisticsService = statisticsService;
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult TotalStatistics()
         {
             byte[] fileContents;
