@@ -27,6 +27,11 @@ namespace WebAnalytics.DAL.Repositories
             return _context.Clients.ToList();
         }
 
+        public Client Get(System.Guid clientId)
+        {
+            return _context.Clients.Where(c => c.ClientId == clientId).FirstOrDefault();
+        }
+
         public int GetCount()
         {
             return _context.Clients.Count();

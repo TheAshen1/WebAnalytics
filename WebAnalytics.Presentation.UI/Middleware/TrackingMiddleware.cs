@@ -38,7 +38,7 @@ namespace WebAnalytics.UI.Middleware
 
                 var cookieId = context.Request.Cookies[_key];
                 var isExistingUser = context.Request.Cookies.ContainsKey(_key);
-                if (!isExistingUser || !Guid.TryParse(cookieId, out clientId))
+                if (!isExistingUser || !Guid.TryParse(cookieId, out clientId) || clientRepository.Get(clientId) is null)
                 {
                     clientId = Guid.NewGuid();
                     var userAgent = deviceResolver.UserAgent.ToString();

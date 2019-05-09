@@ -8,6 +8,7 @@ namespace WebAnalytics.DAL.Repositories.Interfaces
     {
         void Add(Client uniqueUser);
         List<Client> GetAll();
+        Client Get(System.Guid clientId);
         int GetCount();
         PagedResult<Action> GetPage(int page, int pageSize);
     }
