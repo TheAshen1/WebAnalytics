@@ -19,22 +19,42 @@ namespace WebAnalytics.Presentation.UI.Controllers
 
             using (var package = new ExcelPackage())
             {
+                var row = 1;
                 var worksheet = package.Workbook.Worksheets.Add("Sheet1");
 
                 var totalStatistics = _statisticsService.GetTotalStatistics();
-                worksheet.Cells[1, 1].Value = "Total users";
-                worksheet.Cells[1, 2].Value = totalStatistics.TotalUsersCount;
-                worksheet.Cells[2, 1].Value = "Total page views count";
-                worksheet.Cells[2, 2].Value = totalStatistics.TotalPageViewsCount;
-                worksheet.Cells[3, 1].Value = "Total clicks";
-                worksheet.Cells[3, 2].Value = totalStatistics.TotalClicksCount;
-
+                worksheet.Cells[row, 1].Value = "Total users";
+                worksheet.Cells[row++, 2].Value = totalStatistics.TotalUsersCount;
+                worksheet.Cells[row, 1].Value = "Total page views count";
+                worksheet.Cells[row++, 2].Value = totalStatistics.TotalPageViewsCount;
+                worksheet.Cells[row, 1].Value = "Total clicks";
+                worksheet.Cells[row++, 2].Value = totalStatistics.TotalClicksCount;
+                row++;
                 var deviceUsage = _statisticsService.GetDeviceUsageStatistics();
-                worksheet.Cells[4, 1].Value = "Device usage statistics";
+                worksheet.Cells[row, 1].Value = "Device usage statistics";
+                worksheet.Cells[row++, 1].Style.Font.Bold = true;
                 for (int i = 0; i < deviceUsage.Count; i++)
                 {
-                    worksheet.Cells[i + 5, 1].Value = deviceUsage[i].Device;
-                    worksheet.Cells[i + 5, 2].Value = deviceUsage[i].Count;
+                    worksheet.Cells[row, 1].Value = deviceUsage[i].Device;
+                    worksheet.Cells[row++, 2].Value = deviceUsage[i].Count;
+                }
+                row++;
+                var pageViewStatistics = _statisticsService.GetPageViewStatistics();
+                worksheet.Cells[row, 1].Value = "Page view statistics";
+                worksheet.Cells[row++, 1].Style.Font.Bold = true;
+                for (int i = 0; i < pageViewStatistics.Count; i++)
+                {
+                    worksheet.Cells[row, 1].Value = pageViewStatistics[i].Url;
+                    worksheet.Cells[row++, 2].Value = pageViewStatistics[i].Count;
+                }
+                row++;
+                var clickStatistics = _statisticsService.GetClickStatistics();
+                worksheet.Cells[row, 1].Value = "Click statistics";
+                worksheet.Cells[row++, 1].Style.Font.Bold = true;
+                for (int i = 0; i < pageViewStatistics.Count; i++)
+                {
+                    worksheet.Cells[row, 1].Value = clickStatistics[i].Description;
+                    worksheet.Cells[row++, 2].Value = clickStatistics[i].Count;
                 }
 
                 fileContents = package.GetAsByteArray();

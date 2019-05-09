@@ -39,6 +39,7 @@
                 type: "GET",
                 success: function (data) {
                     if (data) {
+                        $("#onlineClientsCount").text(data.onlineClients.length);
                         dashboard.buildGrid("onlineClients", data.onlineClients);
                     }
                 },
@@ -243,7 +244,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: "# of clients",
+                        label: "# of views",
                         data: cleanData,
                         fill: true,
                         backgroundColor: [

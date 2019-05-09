@@ -27,7 +27,11 @@ namespace WebAnalytics.Services
             ActionViewModel lastNavigation = null;
             if (clientActionViewModel.ActionType == Misc.Common.Enums.ClientActionType.PageNavigation)
             {
-                lastNavigation = Mapper.Map(_actionRepository.GetLastClientPageNavigation(clientId));
+                var action = _actionRepository.GetLastClientPageNavigation(clientId);
+                if(action != null)
+                {
+                    lastNavigation = Mapper.Map(_actionRepository.GetLastClientPageNavigation(clientId));
+                }
             }
             var entity = Mapper.Map(clientActionViewModel, clientId);
             _actionRepository.Add(entity);
