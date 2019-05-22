@@ -33,6 +33,9 @@ namespace WebAnalytics.UI.Middleware
         {
             if (!deviceResolver.Device.Crawler)
             {
+                Parser uaParser = Parser.GetDefault();
+                ClientInfo clientInfo = null;
+
                 Guid clientId = Guid.Empty;
                 Guid sessionId = Guid.Empty;
 
@@ -42,8 +45,10 @@ namespace WebAnalytics.UI.Middleware
                 {
                     clientId = Guid.NewGuid();
                     var userAgent = deviceResolver.UserAgent.ToString();
-                    var uaParser = Parser.GetDefault();
-                    ClientInfo clientInfo = uaParser.Parse(userAgent);
+                    if(clientInfo is null)
+                    {
+                        clientInfo = uaParser.Parse(userAgent);
+                    }
                     context.Response.Cookies.Append(_key, clientId.ToString());
                     var newClient = new DAL.Entities.Client()
                     {
@@ -57,11 +62,15 @@ namespace WebAnalytics.UI.Middleware
                     };
                     clientRepository.Add(newClient);
                 }
+                if (clientInfo is null)
+                {
+                    clientInfo = uaParser.Parse(deviceResolver.UserAgent.ToString());
+                }
                 var onlineClient = new OnlineClientViewModel()
                 {
                     ClientId = clientId,
                     Ip = context.Connection.RemoteIpAddress.ToString(),
-                    UserAgent = deviceResolver.UserAgent.ToString(),
+                    UserAgent = $"Device: {deviceResolver.Device.Type.ToString()}, OS: {clientInfo.OS.Family} - {clientInfo.OS.Major}, Browser: {browserResolver.Browser.Type.ToString()} - {browserResolver.Browser.Version.ToString()}",
                     LastActivity = DateTime.Now
                 };
                 OnlineClients.AddOrUpdate(clientId.ToString(), onlineClient, (key, value) => { value.LastActivity = DateTime.Now; return value; });
